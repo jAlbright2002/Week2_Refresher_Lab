@@ -1,5 +1,6 @@
 package ie.atu.week2_refresher_lab;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public Product addProduct(@RequestBody Product product) {
+    public Product addProduct(@Valid @RequestBody Product product) {
         //logic to add products
         service.addProduct(product);
         return product;
