@@ -18,4 +18,20 @@ public class ProductService {
         productList.add(product);
         return product;
     }
+
+    public Product updateProduct(Product product, Long id) {
+        //use id to find original and replace
+        productList.stream()
+                .filter(oldProduct -> oldProduct.getId().equals(id))
+                .findFirst()
+                .ifPresent(oldProduct -> {
+                    oldProduct.setName(product.getName());
+                    oldProduct.setPrice(product.getPrice());
+                });
+        return product;
+    }
+
+    public void deleteProduct(Long id) {
+        productList.removeIf(product -> product.getId().equals(id));
+    }
 }
