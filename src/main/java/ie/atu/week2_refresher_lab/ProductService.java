@@ -18,4 +18,24 @@ public class ProductService {
         productList.add(product);
         return product;
     }
+
+    public Product updateProduct(Product product, String name, double price) {
+        productList.stream().anyMatch(product1 -> {
+            if (product1.getId().equals(product.getId())) {
+                product.setName(name);
+                product.setPrice(price);
+            }
+            return false;
+        });
+        return product;
+    }
+
+    public void deleteProduct(Long id) {
+        productList.stream().anyMatch(product -> {
+            if (product.getId().equals(id)) {
+                productList.remove(product);
+            }
+            return false;
+        });
+    }
 }
