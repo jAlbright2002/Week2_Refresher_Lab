@@ -29,10 +29,10 @@ public class ProductController {
         return product;
     }
 
-    @PutMapping("/update")
-    public Product updateProduct(@Valid @RequestBody Product product, String name, double price) {
+    @PutMapping("/update/{id}")
+    public Product updateProduct(@Valid @RequestBody Product product, @PathVariable Long id) {
         //service logic
-        service.updateProduct(product, name, price);
+        service.updateProduct(product, id);
         return product;
     }
 

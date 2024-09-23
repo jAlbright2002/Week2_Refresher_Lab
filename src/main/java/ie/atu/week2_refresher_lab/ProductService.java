@@ -19,23 +19,19 @@ public class ProductService {
         return product;
     }
 
-    public Product updateProduct(Product product, String name, double price) {
-        productList.stream().anyMatch(product1 -> {
-            if (product1.getId().equals(product.getId())) {
-                product.setName(name);
-                product.setPrice(price);
-            }
-            return false;
-        });
+    public Product updateProduct(Product product, Long id) {
+        //use id to find original and replace
+        productList.stream()
+                .filter(oldProduct -> oldProduct.getId().equals(id))
+                .findFirst()
+                .ifPresent(oldProduct -> {
+                    oldProduct.setName(product.getName());
+                    oldProduct.setPrice(product.getPrice());
+                });
         return product;
     }
 
     public void deleteProduct(Long id) {
-        productList.stream().anyMatch(product -> {
-            if (product.getId().equals(id)) {
-                productList.remove(product);
-            }
-            return false;
-        });
+        productList.removeIf(product -> product.getId().equals(id));
     }
 }
