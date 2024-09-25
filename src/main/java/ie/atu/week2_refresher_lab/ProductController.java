@@ -24,14 +24,12 @@ public class ProductController {
 
     @PostMapping("/add")
     public Product addProduct(@Valid @RequestBody Product product) {
-        //logic to add products
         service.addProduct(product);
         return product;
     }
 
     @PutMapping("/update/{id}")
     public Product updateProduct(@Valid @RequestBody Product product, @PathVariable Long id) {
-        //service logic
         service.updateProduct(product, id);
         return product;
     }
