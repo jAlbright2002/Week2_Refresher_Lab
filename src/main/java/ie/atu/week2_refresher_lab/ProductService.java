@@ -14,21 +14,19 @@ public class ProductService {
         return productList;
     }
 
-    public Product addProduct(Product product) {
+    public void addProduct(Product product) {
         productList.add(product);
-        return product;
     }
 
-    public Product updateProduct(Product product, Long id) {
+    public void updateProduct(Product product, Long id) {
         //use id to find original and replace
-        productList.stream()
-                .filter(oldProduct -> oldProduct.getId().equals(id))
-                .findFirst()
-                .ifPresent(oldProduct -> {
-                    oldProduct.setName(product.getName());
-                    oldProduct.setPrice(product.getPrice());
-                });
-        return product;
+        for (Product product1 : productList) {
+            if (product1.getId().equals(id)) {
+                product1.setName(product.getName());
+                product1.setPrice(product.getPrice());
+                break;
+            }
+        }
     }
 
     public void deleteProduct(Long id) {
